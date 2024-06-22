@@ -155,14 +155,14 @@ public class MarcacaoConsulta extends Registro {
                         if (data.equals(dataAtual) && hora.isBefore(LocalTime.now())) {
                             System.out.println("A hora da consulta não pode ser no passado. Tente novamente.");
                         } else if (hora.isBefore(LocalTime.of(8, 0)) || hora.isAfter(LocalTime.of(17, 0))) {
-                            System.out.println("O último horário de agendamento é as 17h.");
+                            System.out.println("A clínica funciona das 08:00 às 18:00, com o último horário para agendamento às 17:00.");
                         } else if (hora.getMinute() != 0) {
                             System.out.println("A consulta só pode ser marcada em intervalos de uma hora. Ex: 08:00, 09:00, etc. Tente novamente.");
                         } else {
                             String especialidade = escolherEspecialidade(scanner, data);
                             if (especialidade.equals("000")) return false;
 
-                            final LocalTime horaFinal = hora; // Criar uma cópia efetivamente final
+                            final LocalTime horaFinal = hora; 
                             boolean consultaExistente = consultaDAO.listar().stream()
                                 .anyMatch(c -> c.getDataMarcacao().equals(data) 
                                                && c.getHorarioMarcacao().equals(horaFinal)
@@ -170,11 +170,11 @@ public class MarcacaoConsulta extends Registro {
 
                             if (consultaExistente) {
                                 System.out.println("Já existe uma consulta marcada para essa data, horário e especialidade. Tente novamente.");
-                                horarioValido = false; // Resetar para permitir nova tentativa
+                                horarioValido = false; 
                             } else {
                                 MarcacaoConsulta consulta = new MarcacaoConsulta(proximoIdConsulta.getAndIncrement(), paciente, data, hora, especialidade);
                                 consultaDAO.adicionar(consulta);
-                                consultaDAO.salvar(); // Salvar após adicionar a consulta
+                                consultaDAO.salvar(); 
 
                                 System.out.println(paciente.getNome() + ", consulta agendada com sucesso!");
                                 System.out.println("Você tem um horário reservado das " + hora + " às " + hora.plusHours(1) + " para especialidade " + especialidade + " em " + data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " (" + diaSemanaPt + ").");
