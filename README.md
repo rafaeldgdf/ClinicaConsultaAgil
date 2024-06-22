@@ -1,8 +1,28 @@
-# ClinicaConsultaAgil
-Este repositório contém um sistema de gestão de consultas médicas desenvolvido em Java. O sistema foi projetado para automatizar e organizar o gerenciamento de pacientes e consultas em uma clínica médica, proporcionando uma interface de console intuitiva e fácil de usar.
+## Sistema de Gestão de Consultas Médicas
 
+Bem-vindo ao Sistema de Gestão de Consultas Médicas! Este repositório contém uma aplicação de console desenvolvida em Java, projetada para gerenciar pacientes e suas consultas em uma clínica médica. A aplicação facilita o agendamento, listagem e cancelamento de consultas, além do gerenciamento eficiente de pacientes.
 
-# Sistema de Gestão de Consultas Médicas
+### Sobre o Sistema
+
+O sistema automatiza e organiza o processo de cadastro de pacientes, agendamento de consultas, listagem de consultas e pacientes, cancelamento de consultas e remoção de pacientes. Com uma abordagem modular e estruturada, cada componente desempenha um papel específico, integrado no funcionamento geral do sistema.
+
+Este projeto faz parte do Processo Seletivo da Aceleradora Ágil, turma 26 (2024/2º Semestre), promovido pela PUCRS - Pontifícia Universidade Católica do Rio Grande do Sul.
+
+### Autor
+
+Este projeto foi desenvolvido por **Rafael Vitor**, bacharel em Direito e desenvolvedor back-end em desenvolvimento, com foco na linguagem Java. Sinta-se à vontade para entrar em contato para dúvidas, sugestões ou melhorias.
+
+**Contato:**
+- Email: rafaelvd2@hotmail.com
+- LinkedIn: [Rafael Vitor](https://www.linkedin.com/in/rafaelvitor2)
+- GitHub: [rafaeldgdf](https://github.com/rafaeldgdf)
+
+### Contribuição
+
+Contribuições são bem-vindas! Se você encontrar problemas ou tiver sugestões para melhorias, por favor, abra uma issue ou envie um pull request. Vamos colaborar para tornar este sistema ainda melhor!
+
+Obrigado por visitar este repositório e por seu interesse no Sistema de Gestão de Consultas Médicas!
+
 
 ## Sumário
 1. Introdução
@@ -120,7 +140,7 @@ Essas regras garantem que o sistema funcione de maneira eficiente, segura e orga
 - **MarcacaoConsulta:** Representa uma marcação de consulta.
 - **Clinica:** Classe principal que executa o sistema de gestão de consultas.
 
-### 3.3 Descrição Geral dos Métodos
+### 3.3. Descrição Geral dos Métodos
 #### bancoDeDados
 - **DAOGenerico**
   - **adicionar(T objeto):** Adiciona um objeto ao armazenamento.
@@ -251,7 +271,7 @@ O sistema permite ao usuário sair do programa com uma confirmação para evitar
 ## 5. Funcionalidades Extras do Sistema
 O sistema de gestão de consultas médicas possui algumas funcionalidades extras para melhorar a experiência do usuário e garantir a robustez da aplicação. Estas funcionalidades incluem tratamentos de erros e uma funcionalidade específica para retornar ao menu principal.
 
-### 5.1 Tratamentos de Erros
+### 5.1. Tratamentos de Erros
 O sistema foi projetado para lidar com diferentes tipos de erros e fornecer feedback apropriado aos usuários. Aqui estão todos os tratamentos de erros implementados:
 
 #### Validação de Entrada no Menu Principal:
@@ -283,7 +303,7 @@ O sistema foi projetado para lidar com diferentes tipos de erros e fornecer feed
 #### Confirmação de Remoção:
 - Durante a remoção de pacientes, o sistema solicita a confirmação do usuário. Se a confirmação for diferente de "s" ou "n", o sistema notifica o usuário sobre a entrada inválida e solicita uma nova confirmação.
 
-### 5.2 Funcionalidade "000" para Retornar ao Menu
+### 5.2. Funcionalidade "000" para Retornar ao Menu
 Para facilitar a navegação do usuário e permitir um retorno rápido ao menu principal, foi implementada a funcionalidade "000". Em qualquer ponto em que o sistema solicita uma entrada, o usuário pode digitar "000" para retornar ao menu principal. Isso é útil em várias situações, como durante o cadastro de pacientes, marcação de consultas ou remoção de registros. Aqui estão alguns exemplos de como essa funcionalidade é aplicada:
 
 - **Cadastro de Pacientes:** Se o usuário deseja cancelar o processo de cadastro a qualquer momento, ele pode digitar "000", e o sistema o levará de volta ao menu principal.
@@ -293,7 +313,7 @@ Para facilitar a navegação do usuário e permitir um retorno rápido ao menu p
 Essa funcionalidade torna o sistema mais amigável e eficiente, permitindo que os usuários corrijam rapidamente suas ações sem precisar reiniciar o programa ou navegar por vários menus.
 
 ## 6. Explicação Detalhada das Classes e Métodos
-### 6.1 DAOGenerico
+### 6.1. DAOGenerico
 **Funcionalidade da Classe no Sistema:**
 A classe DAOGenerico é fundamental para o sistema, pois abstrai as operações básicas de persistência e manipulação de dados, fornecendo uma base reutilizável para as classes específicas de dados, como PacienteDAO e MarcacaoConsultaDAO. Ao centralizar essas operações, a classe garante consistência e simplicidade no gerenciamento dos dados do sistema.
 
@@ -340,6 +360,45 @@ A classe DAOGenerico é crucial para a escalabilidade e manutenção do sistema,
 - Classe:
   - PacienteDAO gerencia a persistência e a recuperação dos dados dos pacientes, fornecendo uma interface consistente para operações CRUD.
 - Métodos:
+  - `salvar()` é utilizado para persistir as alterações feitas na lista de pacientes.
+  - `carregar()` é utilizado para carregar os dados dos pacientes do armazenamento persistente ao iniciar o sistema.
+  - `converterLinhaParaPaciente(String linha)` é utilizado no método carregar() para converter cada linha do arquivo em um objeto Paciente.
+
+**Resumo da Implementação:**
+A classe PacienteDAO herda de DAOGenerico e implementa métodos específicos para gerenciar a persistência de dados dos pacientes. A lógica principal envolve a leitura e a escrita dos dados de pacientes em um arquivo de texto, assegurando que as informações sejam armazenadas e recuperadas de maneira eficiente e consistente. Isso permite que o sistema mantenha um registro atualizado e confiável dos pacientes, essencial para o funcionamento das operações clínicas.
+
+### 6.2. PacienteDAO
+
+**Funcionalidade da Classe no Sistema:**
+A classe PacienteDAO é responsável pela gestão dos dados dos pacientes, incluindo a persistência e a recuperação desses dados a partir de um arquivo de texto. Esta classe herda de DAOGenerico e implementa métodos específicos para manipulação de dados de pacientes, garantindo a integridade e a consistência das operações relacionadas aos pacientes no sistema.
+
+**Explicação das Bibliotecas e dos Imports:**
+- `import java.io.BufferedReader;`: Importa a classe BufferedReader para leitura eficiente de texto a partir de um arquivo de entrada.
+- `import java.io.BufferedWriter;`: Importa a classe BufferedWriter para escrita eficiente de texto em um arquivo de saída.
+- `import java.io.FileReader;`: Importa a classe FileReader para leitura de arquivos de texto.
+- `import java.io.FileWriter;`: Importa a classe FileWriter para escrita em arquivos de texto.
+- `import java.io.IOException;`: Importa a classe IOException para tratamento de exceções de entrada e saída.
+- `import java.io.File;`: Importa a classe File para manipulação de arquivos e diretórios.
+
+**Explicação dos Construtores:**
+- `PacienteDAO()`: 
+  - **Descrição:** Construtor padrão que chama o método carregar() para inicializar a lista de pacientes a partir do arquivo de armazenamento.
+  - **Importância para o Sistema:** Garante que os dados dos pacientes sejam carregados na inicialização do objeto PacienteDAO, assegurando que o sistema tenha acesso imediato aos dados persistentes.
+
+**Importância da Classe para o Sistema:**
+A classe PacienteDAO é essencial para o funcionamento do sistema, pois gerencia os dados dos pacientes, incluindo sua persistência e recuperação. Isso garante que as informações dos pacientes estejam sempre disponíveis e atualizadas, proporcionando uma base confiável para as operações clínicas.
+
+**Explicação dos Métodos:**
+
+- `converterLinhaParaPaciente(String linha)`
+  - **Descrição:** Este método converte uma linha de texto em um objeto Paciente.
+  - **Lógica Implementada:** Divide a linha de texto nos campos nome e telefone, cria e retorna um novo objeto Paciente com esses valores.
+  - **Importância para o Sistema:** Facilita a conversão de dados textuais do arquivo para objetos Paciente, permitindo a manipulação fácil dos dados no sistema.
+  - **Uso no Sistema:** Utilizado no método carregar() para converter cada linha do arquivo em um objeto Paciente.
+
+**Como a Classe e os Métodos Estão Sendo Usados no Sistema:**
+- **Classe:** PacienteDAO gerencia a persistência e a recuperação dos dados dos pacientes, fornecendo uma interface consistente para operações CRUD.
+- **Métodos:**
   - `salvar()` é utilizado para persistir as alterações feitas na lista de pacientes.
   - `carregar()` é utilizado para carregar os dados dos pacientes do armazenamento persistente ao iniciar o sistema.
   - `converterLinhaParaPaciente(String linha)` é utilizado no método carregar() para converter cada linha do arquivo em um objeto Paciente.
